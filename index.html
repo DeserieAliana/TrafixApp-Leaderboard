@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffix - Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        .leaderboard-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        .leaderboard-table th, .leaderboard-table td {
+            border: 1px solid #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        .leaderboard-table th {
+            background-color: #444;
+        }
+        .leaderboard-table td {
+            background-color: #555;
+        }
+        .leaderboard-table tr:nth-child(even) td {
+            background-color: #666;
+        }
+        .leaderboard-table tr:hover td {
+            background-color: #777;
+        }
+        .leaderboard-table .rank {
+            color: gold;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            text-decoration: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #555;
+        }
+        .challenge, .certificate {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #444;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .challenge h3, .certificate h3 {
+            font-size: 24px;
+        }
+        .points {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+        .emoji {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            Traffix Leaderboard 🏆
+        </div>
+
+        <!-- Leaderboard Table -->
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th>Points</th>
+                    <th>Challenge Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="rank">1</td>
+                    <td>John Doe</td>
+                    <td>120</td>
+                    <td>5 km this week ✅</td>
+                </tr>
+                <tr>
+                    <td class="rank">2</td>
+                    <td>Jane Smith</td>
+                    <td>100</td>
+                    <td>3 km this week 🚶</td>
+                </tr>
+                <tr>
+                    <td class="rank">3</td>
+                    <td>Alex Johnson</td>
+                    <td>80</td>
+                    <td>5 km this week ✅</td>
+                </tr>
+                <!-- Add more users dynamically -->
+            </tbody>
+        </table>
+
+        <!-- Challenge Section -->
+        <div class="challenge">
+            <h3>5 km a Week Challenge</h3>
+            <p>Complete the challenge to earn points and a certificate. <span class="emoji">🚴‍♂️</span></p>
+            <div class="points">Earn 50 points for completing the 5 km this week!</div>
+        </div>
+
+        <!-- Dynamic Certificate Section -->
+        <div class="certificate">
+            <h3>Your Certificate of Achievement</h3>
+            <p>Based on your leaderboard position or challenge completion, you can download your certificate below.</p>
+            <button class="button" onclick="generateCertificate()">Download Certificate</button>
+        </div>
+    </div>
+
+    <script>
+        function generateCertificate() {
+            var rank = prompt("Enter your rank (1, 2, or 3) to generate the certificate:");
+
+            var userName = prompt("Enter your name:");
+
+            if(rank === "1" || rank === "2" || rank === "3") {
+                var certificateContent = `
+                    <html>
+                        <head>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    color: black;
+                                    background-color: white;
+                                    text-align: center;
+                                    padding: 50px;
+                                }
+                                .certificate-box {
+                                    border: 10px solid black;
+                                    padding: 50px;
+                                    width: 60%;
+                                    margin: 0 auto;
+                                    background-color: #f4f4f4;
+                                    border-radius: 10px;
+                                }
+                                .certificate-box h2 {
+                                    font-size: 36px;
+                                    color: #444;
+                                }
+                                .certificate-box p {
+                                    font-size: 20px;
+                                }
+                                .certificate-box .emoji {
+                                    font-size: 40px;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="certificate-box">
+                                <h2>Certificate of Achievement</h2>
+                                <p>Congratulations, ${userName}!</p>
+                                <p>You completed the 5 km challenge this week! <span class="emoji">🏅</span></p>
+                                <p>Your Rank: ${rank}</p>
+                                <p>Keep up the great work! Keep earning points and move up the leaderboard!</p>
+                            </div>
+                        </body>
+                    </html>
+                `;
+                
+                var newWindow = window.open();
+                newWindow.document.write(certificateContent);
+                newWindow.document.close();
+                newWindow.print();
+            } else {
+                alert("Invalid rank. Please enter 1, 2, or 3.");
+            }
+        }
+    </script>
+</body>
+</html>
